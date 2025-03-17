@@ -5,5 +5,4 @@ def Sum_two(nums, target):
             return b[target - nums[i]], i
         b[nums[i]] = i
 
-print(Sum_two([3,2,4], 6))
 
