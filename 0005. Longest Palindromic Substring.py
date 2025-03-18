@@ -1,14 +1,26 @@
-s = input()
-answer = s[0]
+def longest_palindrome(s):
+    ans = s[0]
 
-for i in range(len(s) - 1):
-    for j in range(1, len(s)):
-        ss = s[i:i+j +1]
-        flag = True
-        ss1 = sorted(ss, reverse=True)
-        print(ss1)
-        if ss == ss[::-1]:
-            if len(answer) < len(ss):
-                answer = ss
+    dynamic_matrix = list()
+    for i in range(len(s)):
+        dynamic_matrix.append([0] * len(s))
 
-print(answer)
+    for i in range(len(s)):
+        dynamic_matrix[i][i] = 1
+
+    for i in range(len(s)):
+        if i + 1 >= len(s):
+            break
+        if s[i] == s[i + 1]:
+            dynamic_matrix[i][i + 1] = 1
+            ans = s[i:i + 2]
+
+    for i in range(2, len(s)):
+        for j in range(len(s)):
+            if j + i >= len(s):
+                break
+            if s[j] == s[j + i] and dynamic_matrix[j + 1][i + j - 1] == 1:
+                dynamic_matrix[j][j + i] = 1
+                ans = s[j:j + i + 1]
+
+    return ans
