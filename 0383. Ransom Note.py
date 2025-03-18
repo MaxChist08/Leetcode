@@ -1,31 +1,24 @@
-# C++
+def can_construct(ransomNote, magazine):
+    ransomNote_dict = dict()
+    magazine_dict = dict()
 
-"""class Solution {
-public:
-    bool canConstruct(string ransomNote, string magazine) {
-        map <char, int>A;
+    for x in ransomNote:
+        if x not in ransomNote_dict:
+            ransomNote_dict[x] = 1
+        else:
+            ransomNote_dict[x] += 1
 
-        for (auto x : magazine) {
-            if (A.count(x) == 0) {
-                A[x] = 1;
-            }
-            else {
-                A[x]++;
-            }
-        }
+    for x in magazine:
+        if x not in magazine_dict:
+            magazine_dict[x] = 1
+        else:
+            magazine_dict[x] += 1
 
-        for (auto x : ransomNote) {
-            if (A.count(x) == 0) {
-                return false;
-            }
-            if (A[x] == 0) {
-                return false;
-            }
-            else {
-                A[x]--;
-            }
-        }
+    ANS = True
 
-        return true;
-    }
-};"""
+    for k in ransomNote_dict.keys():
+        if (k not in magazine_dict) or (magazine_dict[k] - ransomNote_dict[k] < 0):
+            ANS = False
+            break
+
+    return ANS

@@ -1,24 +1,13 @@
-# C++
+def majority_element(nums):
+    ans = 0
+    val = 0
 
-"""class Solution {
-public:
-    int majorityElement(vector<int>& nums) {
-        int ans = 0;
-        int val = 0;
-
-        for (auto x : nums) {
-            if(val == 0){
-                ans = x;
-            }
-
-            if (ans == x){
-                val ++;
-            }
-            else{
-                val--;
-            }
-        }
-
-        return ans;
-    }
-};"""
+    for x in nums:
+        if val == 0:
+            ans = x
+            val = 1
+        elif ans == x:
+            val += 1
+        else:
+            val -= 1
+    return ans
