@@ -1,5 +1,6 @@
 def combination_sum(candidates, target):
-    ANS = list()
+    # depth first search
+    """ANS = list()
 
     def f(sum, target, ans, candidates, ANS):
         if sum > target:
@@ -16,5 +17,25 @@ def combination_sum(candidates, target):
         return
 
     f(0, target, [], candidates, ANS)
+    return ANS"""
 
-    return ANS
+
+    # dynamic proggraming
+    """ANS = list()
+    
+    for i in range(target + 1):
+        ANS.append(list())
+
+    ANS[0].append(list())
+
+    for x in candidates:
+        for i in range(x, len(ANS)):
+            if i - x == 0 or len(ANS[i - x]) != 0:
+                for j in range(len(ANS[i - x])):
+                    lst = []
+                    for y in ANS[i - x][j]:
+                        lst.append(y)
+                    lst.append(x)
+                    ANS[i].append(lst)
+
+    return ANS[-1]"""
