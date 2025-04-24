@@ -14,7 +14,6 @@ def min_eating_speed(piles, h):
 
     while start <= finish:
         middle = (start + finish) // 2
-        print(f(middle), start, finish)
         if f(middle) <= h:
             finish = middle - 1
         else:
