@@ -1,5 +1,5 @@
 def min_eating_speed(piles, h):
-    def f(speed):
+    def t(speed):
         time = 0
         for x in piles:
             time += x // speed
@@ -10,11 +10,11 @@ def min_eating_speed(piles, h):
     start = 1
     finish = 0
     for x in piles:
-        finish += x
+        finish = max(x, finish)
 
     while start <= finish:
         middle = (start + finish) // 2
-        if f(middle) <= h:
+        if t(middle) <= h:
             finish = middle - 1
         else:
             start = middle + 1
