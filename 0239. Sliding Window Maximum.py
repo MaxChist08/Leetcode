@@ -4,9 +4,9 @@ class Heap:
 
     def insert(self, data):
         self.values.append(data)
-        self.siftUp(len(self.values) - 1)
+        self.sift_up(len(self.values) - 1)
 
-    def siftUp(self, n):
+    def sift_up(self, n):
         while n > 0:
             if n % 2 == 0:
                 if self.values[(n - 2) // 2] < self.values[n]:
@@ -27,9 +27,9 @@ class Heap:
     def get(self):
         self.values[0], self.values[len(self.values) - 1] = self.values[len(self.values) - 1], self.values[0]
         self.values.pop()
-        self.siftDown(0)
+        self.sift_down(0)
 
-    def siftDown(self, n):
+    def sift_down(self, n):
         while n * 2 + 1 < len(self.values):
             if (n * 2 + 2 < len(self.values)) and (self.values[n * 2 + 2] > self.values[n * 2 + 1]) and (self.values[n * 2 + 2] > self.values[n]):
                 self.values[n * 2 + 2], self.values[n] =  self.values[n], self.values[n * 2 + 2]
