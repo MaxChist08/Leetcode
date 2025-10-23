@@ -1,5 +1,5 @@
 def num_islands(grid):
-    def DFS(lst, used, i, j):
+    def BFS(lst, used, i, j):
         queue = list()
         queue.append((i, j))
         used[i][j] = 1
@@ -46,6 +46,6 @@ def num_islands(grid):
         for j in range(m):
             if grid[i][j] == '1' and used[i][j] == 0:
                 ans += 1
-                DFS(lst, used, i, j)
+                BFS(lst, used, i, j)
 
     return ans
