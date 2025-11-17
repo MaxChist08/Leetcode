@@ -1,4 +1,4 @@
-def find_Nth_Digit(n):
+def find_nth_digit(n):
     k = 0
 
     while n > 9 * 10 ** k * (k + 1):
@@ -9,3 +9,5 @@ def find_Nth_Digit(n):
     num = 10 ** k + n // (k + 1)
 
     return int(str(num)[n % (k + 1)])
+
+
