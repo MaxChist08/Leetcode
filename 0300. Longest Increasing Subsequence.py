@@ -1,11 +1,23 @@
-def length_Of_LIS(nums):
+def length_of_LIS(nums):
+    def bin_search(D, k):
+        s = 0
+        f = len(D) - 1
+
+        while s <= f:
+            m = (s + f) // 2
+            if D[m] >= k:
+                f = m - 1
+            else:
+                s = m + 1
+
+        return s
+
     DP = [1] * len(nums)
-    ans = 1
+    D = [100000] * (len(nums) + 1)
 
-    for i in range(1, len(nums)):
-        for j in range(i - 1, -1, -1):
-            if nums[i] > nums[j]:
-                DP[i] = max(DP[i], DP[j] + 1)
-                ans = max(ans, DP[i])
+    for i in range(0, len(nums)):
+        l = bin_search(D, nums[i])
+        D[l] = min(D[l], nums[i])
+        DP[i] = l + 1
 
-    return ans
+    return max(DP)
