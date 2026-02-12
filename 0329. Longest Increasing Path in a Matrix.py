@@ -1,25 +1,13 @@
 def longest_increasing_path(matrix):
-    def DFS(matrix, DP, i, j):
-        DP[i][j] = 1
+    def DFS(x, y, DP, matrix):
+        for i in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+            if (x + i[0] > -1) and (x + i[0] < len(DP)) and (y + i[1] > -1) and (y + i[1] < len(DP[0])) and matrix[x + i[0]][
+                y + i[1]] > matrix[x][y]:
+                if DP[x + i[0]][y + i[1]] == 0:
+                    DFS(x + i[0], y + i[1], DP, matrix)
+                DP[x][y] = max(DP[x][y], DP[x + i[0]][y + i[1]] + 1)
 
-        if i - 1 >= 0 and matrix[i - 1][j] > matrix[i][j]:
-            if DP[i - 1][j] == -1:
-                DP[i - 1][j] = DFS(matrix, DP, i - 1, j)
-            DP[i][j] = max(DP[i][j], DP[i - 1][j] + 1)
-        if j - 1 >= 0 and matrix[i][j - 1] > matrix[i][j]:
-            if DP[i][j - 1] == -1:
-                DP[i][j - 1] = DFS(matrix, DP, i, j - 1)
-            DP[i][j] = max(DP[i][j], DP[i][j - 1] + 1)
-        if i + 1 < len(matrix) and matrix[i + 1][j] > matrix[i][j]:
-            if DP[i + 1][j] == -1:
-                DP[i + 1][j] = DFS(matrix, DP, i + 1, j)
-            DP[i][j] = max(DP[i][j], DP[i + 1][j] + 1)
-        if j + 1 < len(matrix[0]) and matrix[i][j + 1] > matrix[i][j]:
-            if DP[i][j + 1] == -1:
-                DP[i][j + 1] = DFS(matrix, DP, i, j + 1)
-            DP[i][j] = max(DP[i][j], DP[i][j + 1] + 1)
-
-        return DP[i][j]
+        DP[x][y] = max(DP[x][y], 1)
 
     n = len(matrix)
     m = len(matrix[0])
@@ -28,16 +16,11 @@ def longest_increasing_path(matrix):
     for i in range(n):
         DP.append(list())
         for j in range(m):
-            DP[-1].append(-1)
+            DP[-1].append(0)
 
     for i in range(n):
         for j in range(m):
-            if DP[i][j] == -1:
-                DFS(matrix, DP, i, j)
+            if DP[i][j] == 0:
+                DFS(i, j, DP, matrix)
 
-    ans = 0
-    for i in DP:
-        for j in i:
-            ans = max(ans, j)
-
-    return ans
+    return max(max(x) for x in DP)
